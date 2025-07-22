@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mensaje Diario</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; padding: 25px; background: #faf6ed; color: #333;}
+    .container { max-width: 400px; margin: auto; background: #fffbe6; border-radius: 12px; box-shadow: 0 3px 12px #f0e0c6; padding: 26px;}
+    h2 { text-align: center; }
+    .campo { margin: 16px 0;}
+    .campo label { font-weight: bold; color: #ca6e25; }
+    .numero { font-size: 2em; font-weight: bold; color: #cab600;}
+    .dia { font-size: 1.2em; text-align: center; color: #73548b;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="dia" id="dia"></div>
+    <h2>✨ Mensaje Diario ✨</h2>
+    <div class="campo"><label>Frase del día:</label> <span id="frase"></span></div>
+    <div class="campo"><label>Amor y amistad:</label> <span id="amor"></span></div>
+    <div class="campo"><label>Tu energía:</label> <span id="energia"></span></div>
+    <div class="campo"><label>Acción clave:</label> <span id="accion"></span></div>
+    <div class="campo"><label>Consejo de oro:</label> <span id="consejo"></span></div>
+    <div class="campo"><label>N° de la suerte:</label> <span class="numero" id="numero"></span></div>
+  </div>
+
+  <script>
+    // Puedes añadir más días o convertir a JSON en un servidor para mayor escalabilidad.
+    const mensajesDiarios = [
+      {
+        frase: "Hoy es un gran día para empezar algo nuevo.",
+        amor: "Exprésale tu gratitud a tus seres queridos.",
+        energia: "Las oportunidades llegan vestidas de reto.",
+        accion: "Haz una lista de tus metas para la semana.",
+        consejo: "El tiempo bien invertido trae grandes recompensas.",
+        numero: 7
+      },
+      {
+        frase: "Recuerda que los pequeños logros cuentan.",
+        amor: "Un mensaje sincero mejora cualquier relación.",
+        energia: "Siente orgullo de tus avances.",
+        accion: "Toma 5 minutos y respira profundamente.",
+        consejo: "La paciencia es la mejor compañera del éxito.",
+        numero: 12
+      },
+      {
+        frase: "Tu actitud positiva transforma tu entorno.",
+        amor: "Dedica tiempo a tus amigos.",
+        energia: "Hoy es un buen día para sonreír.",
+        accion: "Ayuda a quien lo necesite.",
+        consejo: "Escucha a tu intuición.",
+        numero: 25
+      },
+      // ... añade los mensajes que quieras, uno por día
+    ];
+
+    function mostrarMensajeDiario() {
+      const diasSemana = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+      const hoy = new Date();
+      const diaDelAño = Math.floor((hoy - new Date(hoy.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+      const mensaje = mensajesDiarios[diaDelAño % mensajesDiarios.length]; // Rota si hay menos mensajes que días
+      document.getElementById('dia').innerText = `${diasSemana[hoy.getDay()]}, ${hoy.getDate()}/${hoy.getMonth()+1}/${hoy.getFullYear()}`;
+      document.getElementById('frase').innerText = mensaje.frase;
+      document.getElementById('amor').innerText = mensaje.amor;
+      document.getElementById('energia').innerText = mensaje.energia;
+      document.getElementById('accion').innerText = mensaje.accion;
+      document.getElementById('consejo').innerText = mensaje.consejo;
+      document.getElementById('numero').innerText = mensaje.numero;
+    }
+
+    mostrarMensajeDiario();
+  </script>
+</body>
+</html>
